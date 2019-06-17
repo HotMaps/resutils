@@ -28,6 +28,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-          'numpy', 'pandas', 'io', 'osgeo', 'pint'
+          'numpy', 'pandas', 'osgeo', 'pint'
     ]
 )
