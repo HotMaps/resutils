@@ -28,6 +28,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-          'numpy', 'pandas', 'gdal', 'pint'
+          'numpy', 'pandas', 'gdal', 'pint', 'matplotlib'
     ]
 )
