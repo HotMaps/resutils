@@ -1,0 +1,5 @@
+numpy
+pandas
+io
+osgeo
+pint

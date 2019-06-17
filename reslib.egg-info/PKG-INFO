@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: reslib
+Version: 0.0.1
+Summary: Useful functions for Solar and Wind module
+Home-page: https://github.com/HotMaps/resutils.git
+Author: Giulia Garegnani
+Author-email: giuliagaregnani@gmail.com
+License: UNKNOWN
+Description: # resutils
+        
+        Package with some common function for the Solar and wind module. Especially
+        
+         - unit.py, containts the function for fixing the best unit for the result file
+         - rester.py, contains function to get lat long coordinates and for working with raster files
+         - output.py to write the output json and to test it
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: Apache License :: 2.0
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
