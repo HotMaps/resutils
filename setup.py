@@ -13,7 +13,7 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(
-    name="reslib",
+    name="resutils",
     version="0.0.1",
     author='Giulia Garegnani',
     author_email='giuliagaregnani@gmail.com',
