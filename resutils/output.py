@@ -89,6 +89,34 @@ def get_indicators(kind, plant, most_suitable,
              "value": str(round(lcoe_plant, 2))}]
 
 
+def get_raster(most_suitable, output_suitable, ds, kind):
+    """
+    Return a dictionary with the output raster and the simbology
+    """
+    most_suitable, unit, factor = resu.best_unit(most_suitable,
+                                                 current_unit="kWh/pixel/year",
+                                                 no_data=0, fstat=np.min,
+                                                 powershift=0)
+    out_ds, symbology = quantile_colors(most_suitable,
+                                        output_suitable,
+                                        proj=ds.GetProjection(),
+                                        transform=ds.GetGeoTransform(),
+                                        qnumb=6,
+                                        no_data_value=0,
+                                        gtype=gdal.GDT_Byte,
+                                        unit=unit,
+                                        options='compress=DEFLATE TILED=YES '
+                                                'TFW=YES '
+                                                'ZLEVEL=9 PREDICTOR=1')
+    del out_ds
+
+    return [{"name": "layers of most suitable roofs for {}".format(kind),
+             "path": output_suitable,
+             "type": "custom",
+             "symbology": symbology
+             }]
+
+
 def hourly_indicators(df, capacity):
     """
     Compute the indicators based on the df profile
