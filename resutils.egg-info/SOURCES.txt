@@ -1,5 +1,9 @@
 README.md
 setup.py
+resutils/__init__.py
+resutils/output.py
+resutils/raster.py
+resutils/unit.py
 resutils.egg-info/PKG-INFO
 resutils.egg-info/SOURCES.txt
 resutils.egg-info/dependency_links.txt
