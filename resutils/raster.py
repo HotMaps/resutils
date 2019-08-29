@@ -34,7 +34,7 @@ def xy2latlong(x, y, ds):
             AUTHORITY["EPSG","9122"]],
         AUTHORITY["EPSG","4326"]]"""
     new_cs = osr.SpatialReference()
-    new_cs .ImportFromWkt(wgs84_wkt)
+    new_cs.ImportFromWkt(wgs84_wkt)
     # create a transform object to convert between coordinate systems
     transform = osr.CoordinateTransformation(old_cs, new_cs)
     # get the coordinates in lat long
@@ -57,7 +57,7 @@ def diff_raster(raster_in, raster_out):
     """
     # count cell of the two rasters
     diff = np.nansum(raster_in) - np.nansum(raster_out)
-    error = diff/np.nansum(raster_in)
+    error = diff / np.nansum(raster_in)
     return error
 
 
@@ -78,8 +78,8 @@ def raster_resize(ras1, ras2):
     ds_2 = ras2.GetGeoTransform()
     x_offset = int((ds_2[0] - ds_1[0]) / ds_2[1])
     y_offset = int((ds_2[3] - ds_1[3]) / (-ds_2[5]))
-    x_incr = ds_1[1]/ds_2[1]
-    y_incr = ds_1[5]/ds_2[5]
+    x_incr = ds_1[1] / ds_2[1]
+    y_incr = ds_1[5] / ds_2[5]
     # ds_2 = ras2.GetGeoTransform()
     # resize shape
     new_matrix = np.zeros(matrix2.shape)
@@ -94,15 +94,17 @@ def raster_resize(ras1, ras2):
     return new_matrix
 
     # allignement
+
+
 #    ncols_offset = (ds_1[0] - ds_2[0]) / ds_1[1]
 #    nrows_offset = (ds_1[3] - ds_2[3]) / ds_1[5]
 #
 #    new_speed[nrows_offset:nrows_offset+speed.shape[1],
 #              ncols_offset:ncols_offset+speed.shape[0]] = speed
 
-    # FIXME: the speed is considered with the same resolution
-    # and extent of available area
-    # by default available area has higher resolution
+# FIXME: the speed is considered with the same resolution
+# and extent of available area
+# by default available area has higher resolution
 
 
 def get_lat_long(ds, most_suitable):
@@ -121,4 +123,5 @@ def get_lat_long(ds, most_suitable):
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

@@ -15,8 +15,8 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="resutils",
     version="0.0.1",
-    author='Giulia Garegnani',
-    author_email='giuliagaregnani@gmail.com',
+    author="Giulia Garegnani",
+    author_email="giuliagaregnani@gmail.com",
     description="Useful functions for Solar and Wind module",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -27,7 +27,5 @@ setuptools.setup(
         "License :: Apache License :: 2.0",
         "Operating System :: OS Independent",
     ],
-    install_requires=[
-          'numpy', 'pandas', 'gdal', 'pint', 'matplotlib'
-    ]
+    install_requires=["numpy", "pandas", "gdal", "pint", "matplotlib"],
 )

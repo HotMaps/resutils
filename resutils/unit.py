@@ -9,7 +9,8 @@ import io
 import pandas as pd
 import numpy as np
 
-UNIT_CSV = io.StringIO("""text,symbol,power_exp
+UNIT_CSV = io.StringIO(
+    """text,symbol,power_exp
 yotta,Y,24
 zetta,Z,21
 exa,E,18
@@ -31,7 +32,8 @@ femto,f,-15
 atto,a,-18
 zepto,z,-21
 yocto,y,-24
-""")
+"""
+)
 UNIT_PREFIX = pd.read_csv(UNIT_CSV, comment="#").fillna("").set_index("text")
 
 
@@ -51,10 +53,10 @@ def split_prefix(unit):
     """
     for index in UNIT_PREFIX.index:
         if index and unit.startswith(index):
-            return index, unit[len(index):].strip()
+            return index, unit[len(index) :].strip()
     for index, prefix in UNIT_PREFIX["symbol"].items():
         if index and unit.startswith(prefix):
-            return index, unit[len(prefix):].strip()
+            return index, unit[len(prefix) :].strip()
     return "", unit
 
 
@@ -87,7 +89,7 @@ def best_prefix(value, powershift=0):
     'kilo'
     """
     power_exp = int("{:E}".format(value)[-3:]) + powershift
-    for index, power in UNIT_PREFIX['power_exp'].items():
+    for index, power in UNIT_PREFIX["power_exp"].items():
         if power_exp >= power:
             return index
 
@@ -108,16 +110,17 @@ def best_unit(array, current_unit, no_data=0, fstat=np.median, powershift=0):
     prefix, unit = split_prefix(current_unit)
     index = ~np.isnan(array) if np.isnan(no_data) else array != no_data
     value = fstat(array[index])
-    nfactor = UNIT_PREFIX.at[prefix, 'power_exp']
-    nvalue = value * 10**nfactor
+    nfactor = UNIT_PREFIX.at[prefix, "power_exp"]
+    nvalue = value * 10 ** nfactor
     # print("nvalue:", nvalue)
     bprefx = best_prefix(nvalue, powershift=powershift)
-    bfactor = UNIT_PREFIX.at[bprefx, 'power_exp']
-    bsymb = UNIT_PREFIX.at[bprefx, 'symbol']
-    factor = (10**nfactor / 10**bfactor)
-    return array * factor, bsymb+unit, factor
+    bfactor = UNIT_PREFIX.at[bprefx, "power_exp"]
+    bsymb = UNIT_PREFIX.at[bprefx, "symbol"]
+    factor = 10 ** nfactor / 10 ** bfactor
+    return array * factor, bsymb + unit, factor
 
 
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()
