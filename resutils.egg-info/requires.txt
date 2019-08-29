@@ -1,5 +1,0 @@
-numpy
-pandas
-gdal
-pint
-matplotlib
