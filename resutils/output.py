@@ -28,11 +28,11 @@ def search(indicator_list, name):
     :returns: the value related to the name or None if missing
     >>> ind = [{'unit': 'MWh/year', 'name': 'Total energy production',
     ...         'value': '2887254.54'},
-    ...        {'unit': 'Million of currency', 'name': 'Total setup costs',
+    ...        {'unit': 'Million of €', 'name': 'Total setup costs',
     ...         'value': '6137'},
     ...        {'unit': '-', 'name': 'Number of installed systems',
     ...         'value': '1022847'},
-    ...        {'unit': 'currency/kWh', 'name': 'Levelized Cost of Energy',
+    ...        {'unit': '€/kWh', 'name': 'Levelized Cost of Energy',
     ...         'value': '0.17'}]
     >>> search(ind, 'Total energy production')
     (2887254.54, 'MWh/year')
@@ -78,13 +78,13 @@ def get_indicators(kind, plant, most_suitable,
     return [{"unit": unit,
              "name": "{} total energy production".format(kind),
              "value": str(round(tot_en_gen, 2))},
-            {"unit": "Million of currency",
+            {"unit": "Million of €",
              "name": "{} total setup costs".format(kind),  # M€
              "value": str(round(tot_setup_costs/1000000))},
             {"unit": "-",
              "name": "Number of installed {} Systems".format(kind),
              "value": str(round(n_plants))},
-            {"unit": "currency/kWh",
+            {"unit": "€/kWh",
              "name": "Levelized Cost of {} Energy".format(kind),
              "value": str(round(lcoe_plant, 2))}]
 
@@ -250,7 +250,7 @@ def line(x, y_labels, y_values, unit, xLabel="Percentage of buildings",
         dic.append({
                     "label": lab,
                     "backgroundColor": palette[i],
-                    "data": ['{:4.0f}'.format(y) for y in y_values[i]]})
+                    "data": ['{:7.3f}'.format(y) for y in y_values[i]]})
 
     graph = {"xLabel": xLabel,
              "yLabel": yLabel.format(unit),
