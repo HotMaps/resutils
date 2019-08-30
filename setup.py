@@ -15,8 +15,8 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="resutils",
     version="0.0.1",
-    author="Giulia Garegnani",
-    author_email="giuliagaregnani@gmail.com",
+    author="Pietro Zambelli",
+    author_email="pietro.zambelli@eurac.edu",
     description="Useful functions for Solar and Wind module",
     long_description=long_description,
     long_description_content_type="text/markdown",
