@@ -6,11 +6,12 @@ Created on Mon Jun 17 15:25:16 2019
 @author: ggaregnani
 """
 
+from typing import Any, Tuple
 from osgeo import osr
 import numpy as np
 
 
-def xy2latlong(x, y, ds):
+def xy2latlong(x: float, y: float, ds: Any) -> Tuple[float, float]:
     """Return lat long coordinate by x, y
 
     >>> import gdal
@@ -42,7 +43,7 @@ def xy2latlong(x, y, ds):
     return latlong[0], latlong[1]
 
 
-def diff_raster(raster_in, raster_out):
+def diff_raster(raster_in: Any, raster_out: Any) -> float:
     """
     Verify the position of the pixel and the consistent with the input file
 
@@ -61,7 +62,7 @@ def diff_raster(raster_in, raster_out):
     return error
 
 
-def raster_resize(ras1, ras2):
+def raster_resize(ras1: Any, ras2: Any) -> Any:
     """
     Adapt the resoltution and the extent of raster1 to raster2
 
@@ -107,7 +108,7 @@ def raster_resize(ras1, ras2):
 # by default available area has higher resolution
 
 
-def get_lat_long(ds, most_suitable):
+def get_lat_long(ds: Any, most_suitable: Any) -> Tuple[float, float]:
     """
     Return the lat_long of the pixel with mean value of the resources
     """

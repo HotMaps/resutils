@@ -5,7 +5,7 @@ Created on Mon Jun 17 15:25:25 2019
 
 @author: ggaregnani
 """
-
+from typing import Any, Dict, List, Optional, Tuple
 
 from pint import UnitRegistry
 import numpy as np
@@ -18,7 +18,9 @@ CMAP_SUN = colors.LinearSegmentedColormap.from_list("solar", CLRS_SUN)
 ureg = UnitRegistry()
 
 
-def search(indicator_list, name):
+def search(
+    indicator_list: List[Dict[str, str]], name: str
+) -> Optional[Tuple[float, str]]:
     """
     Return a value of a name in the list of indicators
 
@@ -43,7 +45,7 @@ def search(indicator_list, name):
     return None
 
 
-def production_per_plant(json, kind="PV"):
+def production_per_plant(json: Dict[str, Any], kind: str = "PV") -> float:
     """
     Return the value of the production of a single plant
 
@@ -62,12 +64,14 @@ def production_per_plant(json, kind="PV"):
     return e_plant
 
 
-def get_indicators(kind, plant, most_suitable, n_plant_raster, discount_rate):
+def get_indicators(
+    kind: str, plant: Any, most_suitable: Any, n_plant_raster: Any, discount_rate: float
+) -> List[Dict[str, str]]:
     """
     Return a dictionary with main indicator of the specific source
     """
     n_plants = n_plant_raster.sum()
-    tot_en_gen_per_year = plant.energy_production * plant.n_plants
+    tot_en_gen_per_year = plant.energy_production * plant.n_plantsn_plant_raster
     tot_en_gen, unit, factor = resu.best_unit(
         tot_en_gen_per_year,
         current_unit="kWh/year",
@@ -101,7 +105,9 @@ def get_indicators(kind, plant, most_suitable, n_plant_raster, discount_rate):
     ]
 
 
-def get_raster(most_suitable, output_suitable, ds, kind):
+def get_raster(
+    most_suitable: Any, output_suitable: str, ds: Any, kind: str
+) -> List[Dict[str, str]]:
     """
     Return a dictionary with the output raster and the simbology
     """

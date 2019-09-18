@@ -6,6 +6,7 @@ Created on Wed Feb  6 11:24:52 2019
 @author: pietro, ggaregnani
 """
 import io
+from typing import Any, Callable, Tuple
 import pandas as pd
 import numpy as np
 
@@ -37,7 +38,7 @@ yocto,y,-24
 UNIT_PREFIX = pd.read_csv(UNIT_CSV, comment="#").fillna("").set_index("text")
 
 
-def split_prefix(unit):
+def split_prefix(unit: str) -> Tuple[str, str]:
     """Return a unit prefix.
 
     >>> split_prefix("Wh")
@@ -60,7 +61,7 @@ def split_prefix(unit):
     return "", unit
 
 
-def best_prefix(value, powershift=0):
+def best_prefix(value: float, powershift: int = 0) -> str:
     """Return the best prefix of a number.
 
     >>> best_prefix(1)
@@ -94,7 +95,13 @@ def best_prefix(value, powershift=0):
             return index
 
 
-def best_unit(array, current_unit, no_data=0, fstat=np.median, powershift=0):
+def best_unit(
+    array: np.array,
+    current_unit: str,
+    no_data: Any = 0,
+    fstat: Callable = np.median,
+    powershift: int = 0,
+) -> Tuple[np.array, str, float]:
     """Return a tuple with a new array with the transformed value and the unit.
 
     >>> best_unit(np.array([1, 1000, 1000000]), "Wh", fstat=np.max)
