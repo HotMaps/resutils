@@ -71,7 +71,7 @@ def get_indicators(
     Return a dictionary with main indicator of the specific source
     """
     n_plants = n_plant_raster.sum()
-    tot_en_gen_per_year = plant.energy_production * plant.n_plantsn_plant_raster
+    tot_en_gen_per_year = plant.energy_production * plant.n_plants
     tot_en_gen, unit, factor = resu.best_unit(
         tot_en_gen_per_year,
         current_unit="kWh/year",
