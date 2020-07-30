@@ -30,11 +30,11 @@ def search(
     :returns: the value related to the name or None if missing
     >>> ind = [{'unit': 'MWh/year', 'name': 'Total energy production',
     ...         'value': '2887254.54'},
-    ...        {'unit': 'Million of €', 'name': 'Total setup costs',
+    ...        {'unit': 'Million of euro', 'name': 'Total setup costs',
     ...         'value': '6137'},
     ...        {'unit': '-', 'name': 'Number of installed systems',
     ...         'value': '1022847'},
-    ...        {'unit': '€/kWh', 'name': 'Levelized Cost of Energy',
+    ...        {'unit': 'euro/kWh', 'name': 'Levelized Cost of Energy',
     ...         'value': '0.17'}]
     >>> search(ind, 'Total energy production')
     (2887254.54, 'MWh/year')
@@ -88,8 +88,8 @@ def get_indicators(
             "value": str(round(tot_en_gen, 2)),
         },
         {
-            "unit": "Million of €",
-            "name": "{} total setup costs".format(kind),  # M€
+            "unit": "Million of euro",
+            "name": "{} total setup costs".format(kind),  # Meuro
             "value": str(round(tot_setup_costs / 1000000)),
         },
         {
@@ -98,7 +98,7 @@ def get_indicators(
             "value": str(round(n_plants)),
         },
         {
-            "unit": "€/kWh",
+            "unit": "euro/kWh",
             "name": "Levelized Cost of {} Energy".format(kind),
             "value": str(round(lcoe_plant, 2)),
         },
