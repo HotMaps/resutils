@@ -28,16 +28,16 @@ def search(
     :param name: name to search for
 
     :returns: the value related to the name or None if missing
-    >>> ind = [{'unit': 'MWh/year', 'name': 'Total energy production',
+    >>> ind = [{'unit': 'MWh/yr', 'name': 'Total energy production',
     ...         'value': '2887254.54'},
-    ...        {'unit': 'Million of euro', 'name': 'Total setup costs',
+    ...        {'unit': 'Million of EUR', 'name': 'Total setup costs',
     ...         'value': '6137'},
     ...        {'unit': '-', 'name': 'Number of installed systems',
     ...         'value': '1022847'},
-    ...        {'unit': 'euro/kWh', 'name': 'Levelized Cost of Energy',
+    ...        {'unit': 'EUR/kWh', 'name': 'Levelized Cost of Energy',
     ...         'value': '0.17'}]
     >>> search(ind, 'Total energy production')
-    (2887254.54, 'MWh/year')
+    (2887254.54, 'MWh/yr')
     """
     for dic in indicator_list:
         if dic["name"] == name:
@@ -74,7 +74,7 @@ def get_indicators(
     tot_en_gen_per_year = plant.energy_production * plant.n_plants
     tot_en_gen, unit, factor = resu.best_unit(
         tot_en_gen_per_year,
-        current_unit="kWh/year",
+        current_unit="kWh/yr",
         no_data=0,
         fstat=np.min,
         powershift=0,
@@ -88,18 +88,18 @@ def get_indicators(
             "value": str(round(tot_en_gen, 2)),
         },
         {
-            "unit": "Million of euro",
-            "name": "{} total setup costs".format(kind),  # Meuro
+            "unit": "Million of EUR",
+            "name": "{} total setup costs".format(kind),  # MEUR
             "value": str(round(tot_setup_costs / 1000000)),
         },
         {
             "unit": "-",
-            "name": "Number of installed {} Systems".format(kind),
+            "name": "Number of installed {} systems".format(kind.lower()),
             "value": str(round(n_plants)),
         },
         {
-            "unit": "euro/kWh",
-            "name": "Levelized Cost of {} Energy".format(kind),
+            "unit": "EUR/kWh",
+            "name": "Levelized cost of {} energy".format(kind.lower()),
             "value": str(round(lcoe_plant, 2)),
         },
     ]
@@ -113,7 +113,7 @@ def get_raster(
     """
     most_suitable, unit, factor = resu.best_unit(
         most_suitable,
-        current_unit="kWh/pixel/year",
+        current_unit="kWh/pixel/yr",
         no_data=0,
         fstat=np.min,
         powershift=0,
@@ -195,7 +195,7 @@ def quantile_colors(
     gtype=gdal.GDT_Byte,
     options="compress=DEFLATE TILED=YES TFW=YES" " ZLEVEL=9 PREDICTOR=1",
     round_decimals=-2,
-    unit="kWh/year",
+    unit="kWh/yr",
 ):
     """Generate a GTiff categorical raster map based on quantiles
     values.
